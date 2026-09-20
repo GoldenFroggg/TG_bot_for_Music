@@ -30,5 +30,5 @@ Music Assistant Bot помогает разобираться в музыке и
 /about - описание бота
 
 <h2 align="center">
-  <a href="Planchic.md">Задачи проекта</a>
+  <a href="Planchik.md">Задачи проекта</a>
 </h2>

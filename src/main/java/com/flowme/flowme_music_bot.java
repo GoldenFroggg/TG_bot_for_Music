@@ -7,10 +7,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 public class flowme_music_bot implements LongPollingSingleThreadUpdateConsumer {
-    // 1. Создаем переменную для клиента отправки сообщений
+
     private final TelegramClient telegramClient;
 
-    // 2. Создаем конструктор, который требует эта ошибка!
     public flowme_music_bot(TelegramClient telegramClient) {
         this.telegramClient = telegramClient;
     }
@@ -22,14 +21,42 @@ public class flowme_music_bot implements LongPollingSingleThreadUpdateConsumer {
             String messageText = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
 
-            // Создаем ответ
+            String answer;
+
+            // Разбираем команду и готовим ответ
+            switch (messageText) {
+                case "/start":
+                    answer = "Привет! Я бот FlowMe Music 🎵\n" +
+                             "Напиши /help, чтобы увидеть, что я умею.";
+                    break;
+
+                case "/help":
+                    answer = "Доступные команды:\n" +
+                             "/help — показать этот список\n" +
+                             "/about — о боте\n" +
+                             "/author — об авторе";
+                    break;
+
+                case "/about":
+                    answer = "FlowMe Music Bot — бот для работы с музыкой.\n" +
+                             "Версия 0.1";
+                    break;
+
+                case "/author":
+                    answer = "Автор бота: FlowMe team 💙";
+                    break;
+
+                default:
+                    answer = "Не знаю такой команды 🤔 Напиши /help.";
+                    break;
+            }
+
             SendMessage message = SendMessage.builder()
                     .chatId(chatId)
-                    .text("Вы написали: " + messageText)
+                    .text(answer)
                     .build();
 
             try {
-                // Отправляем сообщение обратно пользователю
                 telegramClient.execute(message);
             } catch (TelegramApiException e) {
                 e.printStackTrace();

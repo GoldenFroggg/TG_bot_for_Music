@@ -1,9 +1,11 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
 }
 
-group = 'com.example'
+group = 'com.flowme'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -11,16 +13,23 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
     implementation 'org.telegram:telegrambots-longpolling:7.10.0'
-
     implementation 'org.telegram:telegrambots-client:7.10.0'
+    // slf4j-simple убран: Spring Boot приносит свой Logback
 
-    implementation 'org.slf4j:slf4j-simple:2.0.13'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 application {
     mainClass = 'com.flowme.BotApplication'
 }
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }

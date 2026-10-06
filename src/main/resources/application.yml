@@ -1,0 +1,7 @@
+spring:
+  main:
+    web-application-type: none
+
+bot:
+  # токен берём из переменной окружения BOT_TOKEN, в репозиторий не кладём
+  token: ${8915501494:AAEsuEUb1vEQ6JAdxwFvzFQfLyKRW_4EkzY}

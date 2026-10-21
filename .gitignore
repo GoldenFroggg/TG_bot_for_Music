@@ -1,4 +1,7 @@
-*.class
-target/
-*.iml
+.gradle/
+build/
+out/
 .idea/
+*.imlgit rm -r --cached .gradle build
+     git add .gitignore
+     git commit -m "Убраны кэш Gradle и сборка из репозитория"

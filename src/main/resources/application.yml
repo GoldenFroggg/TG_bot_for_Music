@@ -1,2 +1,5 @@
 bot:
   token: "8915501494:AAHgss7VgTzK5L8ZEklJKvOd97YjbWE3B_4"
+spring:
+  main:
+    web-application-type: none

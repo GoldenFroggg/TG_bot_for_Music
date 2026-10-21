@@ -7,6 +7,7 @@ public record IncomingMessage(long chatId, long userId, String command, String a
         String[] parts = text.trim().split("\\s+", 2);
         String command = parts[0].split("@")[0].toLowerCase(); // "/track@MyBot" -> "/track"
         String args = parts.length > 1 ? parts[1].trim() : "";
+        System.out.println(args);
         return new IncomingMessage(chatId, userId, command, args);
     }
 }

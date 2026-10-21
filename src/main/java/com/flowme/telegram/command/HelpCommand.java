@@ -2,24 +2,35 @@ package com.flowme.telegram.command;
 
 import com.flowme.telegram.model.BotReply;
 import com.flowme.telegram.model.IncomingMessage;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.stereotype.Component;
-
 import java.util.stream.Collectors;
+import java.util.List;
 
-@Component
 public class HelpCommand extends AbstractCommand {
 
-    private final ObjectProvider<CommandHandler> handlers;
+    private final List<CommandHandler> handlers;
 
-    public HelpCommand(ObjectProvider<CommandHandler> handlers) {
+    public HelpCommand(List<CommandHandler> handlers) {
         super("/help", "Список команд");
         this.handlers = handlers;
     }
 
     @Override
     protected BotReply execute(IncomingMessage message) {
-        String text = handlers.orderedStream()
+        String args = message.args().trim().toLowerCase().replace("/", "");
+        if (!args.isEmpty()) {
+            for (int i = 0; i < handlers.size(); i++) {
+                if (handlers.get(i).name().equals("/" + args)) {
+                    return BotReply.text(handlers.get(i).name() + " — " + handlers.get(i).description());
+                }
+            }
+            return BotReply.text("Такой команды нет");
+        }
+        if (args.isEmpty()) {
+            System.err.println("Ошибка: не найден файл about.txt");
+            return BotReply.text("Ошибка: укажите название трека, например /track Get Lucky");
+
+        }
+        String text = handlers.stream()
                 .map(h -> h.name() + " — " + h.description())
                 .sorted()
                 .collect(Collectors.joining("\n"));

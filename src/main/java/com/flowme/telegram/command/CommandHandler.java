@@ -7,7 +7,7 @@ public interface CommandHandler {
 
     String name();          // "/help"
 
-    String description();   // показывается в /help
+    String description();
 
     BotReply handle(IncomingMessage message);
 }

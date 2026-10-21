@@ -1,0 +1,22 @@
+# Java
+*.class
+
+# Gradle
+build/
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# IntelliJ IDEA
+*.iml
+.idea/
+out/
+
+# Секреты (токены)
+application.yml
+config.properties
+
+# OS-мусор
+.DS_Store
+Thumbs.db

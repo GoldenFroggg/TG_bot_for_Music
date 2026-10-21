@@ -29,8 +29,19 @@ public class BotApplication {
             TelegramClient telegramClient = new OkHttpTelegramClient(botToken);
 
             List<CommandHandler> handlers = new ArrayList<>();
-            // handlers.add(new StartCommand());  // добавьте ваши команды
-            // handlers.add(new HelpCommand(handlers));
+
+            // 1. Добавляем все простые команды
+            handlers.add(new StartCommand());
+            handlers.add(new AboutCommand());
+            handlers.add(new AuthorCommand());
+
+            // 2. Добавляем команду /report (ей нужен telegramClient, чтобы отправлять сообщения)
+            handlers.add(new CommandReport(telegramClient));
+
+            // 3. HelpCommand должен стоять последним, так как он принимает весь список
+            handlers.add(new HelpCommand(handlers));
+
+            // 4. Создаем роутер
             CommandRouter router = new CommandRouter(handlers);
 
             botsApplication.registerBot(botToken, new FlowmeMusicBot(telegramClient, router));

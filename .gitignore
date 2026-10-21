@@ -1,4 +1,3 @@
- Java
 *.class
 
 # Gradle
@@ -16,7 +15,3 @@ out/
 # Секреты (токены)
 application.yml
 config.properties
-
-# OS-мусор
-.DS_Store
-Thumbs.db

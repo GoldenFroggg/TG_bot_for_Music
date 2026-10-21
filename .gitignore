@@ -1,6 +1,22 @@
-.gradle/
+ Java
+*.class
+
+# Gradle
 build/
-out/
-.idea/
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# IntelliJ IDEA
 *.iml
-C:\Users\timur\Desktop\TG_bot_for_Music\src\main\resources\application.ymlпS
+.idea/
+out/
+
+# Секреты (токены)
+application.yml
+config.properties
+
+# OS-мусор
+.DS_Store
+Thumbs.db

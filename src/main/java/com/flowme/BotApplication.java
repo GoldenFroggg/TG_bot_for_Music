@@ -1,5 +1,4 @@
-java
-        package com.flowme;
+package com.flowme;
 
 import com.flowme.telegram.CommandRouter;
 import com.flowme.telegram.FlowmeMusicBot;

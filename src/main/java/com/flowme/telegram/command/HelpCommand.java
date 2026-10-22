@@ -25,15 +25,12 @@ public class HelpCommand extends AbstractCommand {
             }
             return BotReply.text("Такой команды нет");
         }
-        if (args.isEmpty()) {
-            System.err.println("Ошибка: не найден файл about.txt");
-            return BotReply.text("Ошибка: укажите название трека, например /track Get Lucky");
-
+        else {
+            String text = handlers.stream()
+                    .map(h -> h.name() + " — " + h.description())
+                    .sorted()
+                    .collect(Collectors.joining("\n"));
+            return BotReply.text("Доступные команды:\n" + text);
         }
-        String text = handlers.stream()
-                .map(h -> h.name() + " — " + h.description())
-                .sorted()
-                .collect(Collectors.joining("\n"));
-        return BotReply.text("Доступные команды:\n" + text);
     }
 }

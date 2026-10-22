@@ -1,4 +1,5 @@
-package com.flowme;
+java
+        package com.flowme;
 
 import com.flowme.telegram.CommandRouter;
 import com.flowme.telegram.FlowmeMusicBot;
@@ -30,10 +31,19 @@ public class BotApplication {
             TelegramClient telegramClient = new OkHttpTelegramClient(botToken);
 
             List<CommandHandler> handlers = new ArrayList<>();
+
+            // 1. Простые команды
             handlers.add(new StartCommand());
-            handlers.add(new HelpCommand(handlers));
-            handlers.add(new AuthorCommand());
             handlers.add(new AboutCommand());
+            handlers.add(new AuthorCommand());
+
+            // 2. /report: ей нужен telegramClient, чтобы отправлять сообщения
+            handlers.add(new CommandReport(telegramClient));
+
+            // 3. HelpCommand всегда последней: ей нужен весь список
+            handlers.add(new HelpCommand(handlers));
+
+            // 4. Роутер
             CommandRouter router = new CommandRouter(handlers);
 
             botsApplication.registerBot(botToken, new FlowmeMusicBot(telegramClient, router));
